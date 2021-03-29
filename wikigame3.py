@@ -26,30 +26,30 @@ def clear():
 	'''
 	Function to clear output on windows, mac, unix systems once target is found
 	'''
-	if name == 'nt':
-		_ = system('cls')
-	else:
-		_ = system('clear')
+  if name == 'nt':
+	_ = system('cls')
+  else:
+	_ = system('clear')
 	try:
-		from IPython.display import clear_output
-		clear_output()
+	  from IPython.display import clear_output
+	  clear_output()
 
 
 def parse2node(element):
-'''
-  Given: BS4 'a' element
-  Return: node string of /wiki Article
-  '''
+  	'''
+  	Given: BS4 'a' element
+  	Return: node string of /wiki Article
+  	'''
   filterTypes = ['.jpg', '.ogg', '.svg', '.png', '.tif', '.gif', '.ogv', 'jpeg', '.oga']
   node = element['href']
   if node[:5] == '/wiki' and node[-4:].lower() not in filterTypes:
     return node
 
 def get_children(ext):
-  '''
-  Given: wikipedia url extension
-  Return: list of child wiki article hrefs, if no child articles, return empty list
-  '''
+  	'''
+  	Given: wikipedia url extension
+  	Return: list of child wiki article hrefs, if no child articles, return empty list
+  	'''
   try:
     r = requests.get(base_url + ext)
     soup = BeautifulSoup(r.text, 'html.parser')
